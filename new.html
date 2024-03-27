@@ -1,21 +1,23 @@
-
 <!--By Erik Kim, Mar 26, 2024-->
 <!DOCTYPE HTML>
 <html>
+
 <head>
   <link rel="stylesheet" href="/css/bootstrap.css">
   <title>Ants</title>
 </head>
+
 <body>
   <h1 class="text-center">Ants Colony Simulation v 1.0.0.1</h1>
   <div class="text-center"><button id="Infobutton" type="button" class="btn btn-dark">Info</button></div>
   <div id="container"></div>
   <div id="foodCounter" style="position: absolute; top: 0; left: 0; margin: 10px; font-size: 20px; color: black;"></div>
-  <div id="updatelog" style="position: absolute; top: 0; right: 0; margin: 10px; font-size: 20px; color: black;">Updates coming soon!</div>
+  <div id="updatelog" style="position: absolute; top: 0; right: 0; margin: 10px; font-size: 20px; color: black;">Updates
+    coming soon!</div>
   <script src="js/bootstrap.js"></script>
   <script src="https://unpkg.com/konva@9/konva.min.js"></script>
   <script defer="defer">
-    document.getElementById('Infobutton').onclick = function() {
+    document.getElementById('Infobutton').onclick = function () {
       alert('Hello!!! Click anywhere on the screen to drop food, and watch as the ants navigate towards the food sources. The ants use a combination of random exploration and attraction to nearby food to find their targets. Once an ant reaches a piece of food, it will return to the colony, satisfied that it has collected the food. The number of successful food collections is displayed at the top left corner of the screen. This simulation aims to mimic some aspects of ant foraging behavior, including their ability to search for and gather food. Experiment by placing food at different locations and observe how the ants adjust their paths to reach their goals. Its still very much in the prototype stage but I hope you enjoy the simulation and learn about the very invigorating world of ants!');
     };
     //constants are declared here
@@ -70,7 +72,7 @@
           radius: 5,
           fill: 'brown',
         });
-        ants.push({ shape: ant, angle: Math.random() * 360, mode: 0 });
+        ants.push({shape: ant, angle: Math.random() * 360, mode: 0});
         antLayer.add(ant);
       }
     }
@@ -83,7 +85,7 @@
 
     function updateAnts() {
       ants.forEach(ant => {
-        if (ant.mode === 0)  { //searching
+        if (ant.mode === 0) { //searching
           ant.shape.fill('brown');
           const speed = 5;
           ant.angle += (Math.random() - 0.5) * 20;
@@ -116,7 +118,7 @@
 
           if (Math.sqrt(Math.pow(ant.shape.x() - COLONY_X, 2) + Math.pow(ant.shape.y() - COLONY_Y, 2
           )) <= COLONY_RADIUS) {
-            ant.mode = 0; 
+            ant.mode = 0;
             antsBroughtFood += 1;
             updateFoodCounter();
           }
@@ -131,7 +133,7 @@
           if (Math.sqrt(Math.pow(ant.shape.x() - food.x(), 2) + Math.pow(ant.shape.y() - food.y(), 2)) <= (ant.shape.radius() + food.radius())) {
             food.remove();
             const index = foods.indexOf(food);
-            if(index !== -1) {
+            if (index !== -1) {
               foods.splice(index, 1);
             }
             ant.mode = 1;
@@ -161,7 +163,7 @@
 
     function animate() {
       requestAnimationFrame(animate);
-      updateAnts(); 
+      updateAnts();
       antLayer.draw();
       pheromoneLayer.draw();
       uiLayer.draw();
@@ -170,5 +172,5 @@
     animate();
   </script>
 </body>
-</html>
 
+</html>
